@@ -19,34 +19,6 @@ import ganymedes01.aobd.ore.Ore;
 
 public class OreSwapper {
 
-    public void addOre(Ore ore, int dropAmount, int minXP, int maxXP, ItemStack orestack)
-    {
-        int oreID = OreDictionary.getOreID(ore.name());
-
-        int dropCount = dropAmount;
-        if(ore.name().contains("Nether"))
-            dropCount *= 2;
-
-        //DropStorage infos = new DropStorage(orestack, dropCount, minXP, maxXP);
-
-        //OreChunkAddon.dropMap.put(ore.name(), infos);
-    }
-    
-    @SubscribeEvent
-    public void OreDictTooltip(ItemTooltipEvent event)
-    {
-        if(!event.showAdvancedItemTooltips)
-            return;
-        
-        int[] oreIDs = OreDictionary.getOreIDs(event.itemStack);
-        
-        if(oreIDs.length <= 0)
-            return;
-        
-        for(int i = 0; i < oreIDs.length; ++i)
-            event.toolTip.add(OreDictionary.getOreName(oreIDs[i]));
-    }
-
     @SubscribeEvent
     public void SwapOres(HarvestDropsEvent event)
     {
@@ -74,7 +46,7 @@ public class OreSwapper {
                 	oreInfos = OreChunkAddon.dropMap.get(orename);
                 	int count = randomCount(oreInfos.count, event.fortuneLevel, event.world);
                 	
-                	ItemStack chunkStack = oreInfos.chunkItem;
+                	ItemStack chunkStack = new ItemStack(oreInfos.chunkItem);
                 	chunkStack.stackSize = count;
         			modifiedDrop = chunkStack;
                 	break;

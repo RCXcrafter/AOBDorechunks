@@ -47,6 +47,7 @@ public class ConfigHandler {
 		config.setDropCount(getInt(name, "Amount of chunks to drop", config.getDropCount()));
 		config.setMinXPDrop(getInt(name, "Minimum XP drop", config.getMinXPDrop()));
 		config.setMaxXPDrop(getInt(name, "Maximum XP drop", config.getMaxXPDrop()));
+		config.setStoneType(getString(name, "Stone type", config.getStoneType()));
 		usedCategories.add(name);
 
 		if (configFile.hasChanged())
@@ -67,5 +68,9 @@ public class ConfigHandler {
 
 	private int getInt(String category, String name, int def) {
 		return configFile.get(category, name, def).getInt(def);
+	}
+
+	private String getString(String category, String name, String def) {
+		return configFile.get(category, name, def).getString();
 	}
 }

@@ -1,7 +1,6 @@
 package com.rcx.aobdorechunks;
 
 import ganymedes01.aobd.api.IAOBDAddon;
-import ganymedes01.aobd.items.AOBDItem;
 import ganymedes01.aobd.ore.Ore;
 import ganymedes01.aobd.ore.OreFinder;
 import ganymedes01.aobd.recipes.RecipesModule;
@@ -13,6 +12,7 @@ import java.util.Map;
 
 import com.rcx.aobdorechunks.config.ConfigHandler;
 import com.rcx.aobdorechunks.config.OreChunksConfigs;
+import com.rcx.aobdorechunks.item.AOBDItemOrechunk;
 import com.rcx.aobdorechunks.lib.Reference;
 
 import net.minecraft.item.Item;
@@ -84,7 +84,7 @@ public class OreChunkAddon implements IAOBDAddon {
 
 			// Create the ore chunk item
 			String base = "orechunk";
-			AOBDItem orechunk = new AOBDItem(base, ore);
+			AOBDItemOrechunk orechunk = new AOBDItemOrechunk(base, ore, config.getStoneType());
 			orechunk.setTextureName(Reference.MOD_ID + ":" + base);
 			orechunk.setUnlocalizedName(Reference.MOD_ID + "." + base + ore);
 			OreFinder.registerOre(base + ore.name(), orechunk);

@@ -29,7 +29,8 @@ public class OreSwapper {
 
         OreInfos oreInfos = null;
         String orename = null;
-    	ItemStack modifiedDrop = null;
+        ArrayList<ItemStack> oldDrops = new ArrayList<ItemStack>();
+        ArrayList<ItemStack> modifiedDrops = new ArrayList<ItemStack>();
 
         for(ItemStack drop : event.drops){
             if(drop.getItem() instanceof ItemBlock)
@@ -44,23 +45,24 @@ public class OreSwapper {
                     	continue;
 
                 	oreInfos = OreChunkAddon.dropMap.get(orename);
-                	int count = randomCount(oreInfos.count, event.fortuneLevel, event.world);
+                	int count = randomCount(drop.stackSize * oreInfos.count, event.fortuneLevel, event.world);
                 	
                 	ItemStack chunkStack = new ItemStack(oreInfos.chunkItem);
-                	chunkStack.stackSize = count;
-        			modifiedDrop = chunkStack;
-                	break;
-                	
+        			for(int c = 0; c < count; ++c) {
+        				modifiedDrops.add(chunkStack);
+        	        }
                 }
+                if(!(oreInfos == null))
+                	oldDrops.add(drop);
             }
         }
 
         if(oreInfos == null)
             return;
         
-        event.drops.clear();
+        event.drops.removeAll(oldDrops);
         event.dropChance = 1.0f;
-    	event.drops.add(modifiedDrop);
+    	event.drops.addAll(modifiedDrops);
         
         if(oreInfos.maxXP <= 0)
             return;

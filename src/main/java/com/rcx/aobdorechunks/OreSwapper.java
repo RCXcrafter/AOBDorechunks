@@ -29,47 +29,55 @@ public class OreSwapper {
 
         OreInfos oreInfos = null;
         String orename = null;
+        boolean alreadyDropped = false;
         ArrayList<ItemStack> oldDrops = new ArrayList<ItemStack>();
         ArrayList<ItemStack> modifiedDrops = new ArrayList<ItemStack>();
 
         for(ItemStack drop : event.drops){
-            if(drop.getItem() instanceof ItemBlock)
-            {
-                int[] oreids = OreDictionary.getOreIDs(drop);
-                for (int i=0; i<oreids.length; i++) {
-                	orename = OreDictionary.getOreName(oreids[i]);
-                	if (!orename.startsWith("ore"))
-                		continue;
+        	int[] oreids = OreDictionary.getOreIDs(drop);
+            for (int i=0; i<oreids.length; i++) {
+                orename = OreDictionary.getOreName(oreids[i]);
+                int count = drop.stackSize;
+                if (!(orename.startsWith("ore") || orename.startsWith("dust")))
+                	continue;
 
-                    if(!OreChunkAddon.dropMap.containsKey(orename))
+                if (orename.startsWith("dust")) {
+                	orename = orename.replace("dust", "ore");
+                	count = 1;
+
+                	if(alreadyDropped)
                     	continue;
-
-                	oreInfos = OreChunkAddon.dropMap.get(orename);
-                	int count = randomCount(drop.stackSize * oreInfos.count, event.fortuneLevel, event.world);
-                	
-                	ItemStack chunkStack = new ItemStack(oreInfos.chunkItem);
-        			for(int c = 0; c < count; ++c) {
-        				modifiedDrops.add(chunkStack);
-        	        }
                 }
-                if(!(oreInfos == null))
-                	oldDrops.add(drop);
+                if(!OreChunkAddon.dropMap.containsKey(orename))
+                    continue;
+
+                oreInfos = OreChunkAddon.dropMap.get(orename);
+                count = randomCount(count * oreInfos.count, event.fortuneLevel, event.world);
+
+                ItemStack chunkStack = new ItemStack(oreInfos.chunkItem);
+        		for(int c = 0; c < count; ++c) {
+        			modifiedDrops.add(chunkStack);
+        			alreadyDropped = true;
+        	    }
+        		break;
             }
+            if(!(oreInfos == null))
+            	oldDrops.add(drop);
         }
 
         if(oreInfos == null)
             return;
-        
+
         event.drops.removeAll(oldDrops);
         event.dropChance = 1.0f;
     	event.drops.addAll(modifiedDrops);
-        
+
         if(oreInfos.maxXP <= 0)
             return;
-        
+
         int countOrbs = event.world.rand.nextInt(oreInfos.maxXP-oreInfos.minXP);
         countOrbs += oreInfos.minXP;
-        
+
         for(int i = 0; i < countOrbs; ++i)
         {
             event.world.spawnEntityInWorld(new EntityXPOrb(event.world, (double)event.x + 0.5D, (double)event.y + 0.5D, (double)event.z + 0.5D, 1));

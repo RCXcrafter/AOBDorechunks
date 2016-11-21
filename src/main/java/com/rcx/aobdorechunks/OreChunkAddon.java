@@ -98,7 +98,6 @@ public class OreChunkAddon implements IAOBDAddon {
 			//make it drop
 			OreInfos infos = new OreInfos(orechunk, config.getDropCount(), config.getMinXPDrop(), config.getMaxXPDrop());
 			dropMap.put("ore" + ore.name(), infos);
-			//OreSwapper.addOre(ore, config.getDropCount(), config.getMinXPDrop(), config.getMaxXPDrop(), new ItemStack(orechunk));
 		}
 	}	
 	public void notifyColourCreation() {}

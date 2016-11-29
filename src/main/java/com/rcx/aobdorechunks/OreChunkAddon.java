@@ -30,7 +30,7 @@ public class OreChunkAddon implements IAOBDAddon {
 
 	@Override
 	public void receiveOreList(Collection<Ore> ores) {
-		
+
 		for (Ore ore : ores) {
 			if (!ore.isEnabled())
 				continue;
@@ -94,28 +94,26 @@ public class OreChunkAddon implements IAOBDAddon {
 			ItemStack ingot;
 			ingot = RecipesModule.getOreStack("ingot", ore);
 			GameRegistry.addSmelting(new ItemStack(orechunk), ingot, 1F);
-			
-			//make it drop
+
+			// make it drop
 			OreInfos infos = new OreInfos(orechunk, config.getDropCount(), config.getMinXPDrop(), config.getMaxXPDrop());
 			dropMap.put("ore" + ore.name(), infos);
 		}
-	}	
+	}
+
 	public void notifyColourCreation() {}
 
+	public class OreInfos {
+		public Item chunkItem;
+		public int count;
+		public int minXP;
+		public int maxXP;
 
-    public class OreInfos
-    {
-        public Item chunkItem;
-        public int count;
-        public int minXP;
-        public int maxXP;
-
-        public OreInfos(Item oreChunkItem, int baseCount, int dropXPMin, int dropXPMax)
-        {
-        	chunkItem = oreChunkItem;
-            count = baseCount;
-            minXP = dropXPMin;
-            maxXP = dropXPMax;
-        }
-    }
+		public OreInfos(Item oreChunkItem, int baseCount, int dropXPMin, int dropXPMax) {
+			chunkItem = oreChunkItem;
+			count = baseCount;
+			minXP = dropXPMin;
+			maxXP = dropXPMax;
+		}
+	}
 }

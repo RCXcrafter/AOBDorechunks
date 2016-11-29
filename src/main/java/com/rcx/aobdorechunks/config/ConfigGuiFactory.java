@@ -1,6 +1,5 @@
 package com.rcx.aobdorechunks.config;
 
-
 import java.util.Set;
 
 import net.minecraft.client.Minecraft;

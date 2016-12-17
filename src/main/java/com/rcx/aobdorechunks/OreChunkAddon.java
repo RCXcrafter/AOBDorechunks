@@ -100,9 +100,7 @@ public class OreChunkAddon implements IAOBDAddon {
 			dropMap.put("ore" + ore.name(), infos);
 		}
 	}
-
-	public void notifyColourCreation() {
-	}
+	public void notifyColourCreation() {}
 
 	public class OreInfos {
 		public Item chunkItem;

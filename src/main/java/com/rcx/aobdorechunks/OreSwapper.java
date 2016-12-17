@@ -1,21 +1,15 @@
 package com.rcx.aobdorechunks;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import com.rcx.aobdorechunks.OreChunkAddon.OreInfos;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.item.EntityXPOrb;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import ganymedes01.aobd.ore.Ore;
 
 public class OreSwapper {
 
@@ -60,11 +54,11 @@ public class OreSwapper {
 				}
 				break;
 			}
-			if (!(oreInfos == null))
+			if (!oreInfos.equals(null))
 				oldDrops.add(drop);
 		}
 
-		if (oreInfos == null)
+		if (oreInfos.equals(null))
 			return;
 
 		event.drops.removeAll(oldDrops);
@@ -78,7 +72,7 @@ public class OreSwapper {
 		countOrbs += oreInfos.minXP;
 
 		for (int i = 0; i < countOrbs; ++i) {
-			event.world.spawnEntityInWorld(new EntityXPOrb(event.world, (double) event.x + 0.5D, (double) event.y + 0.5D, (double) event.z + 0.5D, 1));
+			event.world.spawnEntityInWorld(new EntityXPOrb(event.world, event.x + 0.5D, event.y + 0.5D, event.z + 0.5D, 1));
 		}
 	}
 

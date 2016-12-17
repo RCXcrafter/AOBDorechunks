@@ -1,6 +1,5 @@
 package com.rcx.aobdorechunks.config;
 
-
 import com.rcx.aobdorechunks.lib.Reference;
 
 import java.util.ArrayList;

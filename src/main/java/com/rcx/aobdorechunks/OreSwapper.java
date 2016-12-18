@@ -54,11 +54,11 @@ public class OreSwapper {
 				}
 				break;
 			}
-			if (!oreInfos.equals(null))
+			if (!(oreInfos == null))
 				oldDrops.add(drop);
 		}
 
-		if (oreInfos.equals(null))
+		if (oreInfos == null)
 			return;
 
 		event.drops.removeAll(oldDrops);

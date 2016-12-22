@@ -98,6 +98,16 @@ public class OreChunkAddon implements IAOBDAddon {
 			// make it drop
 			OreInfos infos = new OreInfos(orechunk, config.getDropCount(), config.getMinXPDrop(), config.getMaxXPDrop());
 			dropMap.put("ore" + ore.name(), infos);
+
+			// aluminum/aluminium nonsense
+			if ("Aluminum".equals(ore.name())) {
+				OreDictionary.registerOre(AOBDOC.processingUnit + "Aluminium", orechunk);
+				dropMap.put("oreAluminium", infos);
+			}
+			if ("Aluminium".equals(ore.name())) {
+				OreDictionary.registerOre(AOBDOC.processingUnit + "Aluminum", orechunk);
+				dropMap.put("oreAluminum", infos);
+			}
 		}
 	}
 	public void notifyColourCreation() {}

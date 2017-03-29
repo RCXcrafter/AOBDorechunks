@@ -22,35 +22,46 @@ public class OreSwapper {
 
 		OreInfos oreInfos = null;
 		String orename = null;
-		boolean alreadyDropped = false;
 		ArrayList<ItemStack> oldDrops = new ArrayList<ItemStack>();
 		ArrayList<ItemStack> modifiedDrops = new ArrayList<ItemStack>();
+		int dropCount = 0;
+		boolean stopDropping = false;
 
 		for (ItemStack drop : event.drops) {
 			int[] oreids = OreDictionary.getOreIDs(drop);
 			for (int i = 0; i < oreids.length; i++) {
 				orename = OreDictionary.getOreName(oreids[i]);
 				int count = drop.stackSize;
+				boolean alreadyMultiplied = false;
+
 				if (!(orename.startsWith("ore") || orename.startsWith("dust")))
 					continue;
 
 				if (orename.startsWith("dust")) {
 					orename = orename.replace("dust", "ore");
-					count = 1;
 
-					if (alreadyDropped)
+					if (stopDropping)
 						continue;
+
+					alreadyMultiplied = true;
 				}
 				if (!OreChunkAddon.dropMap.containsKey(orename))
 					continue;
 
+				if (orename.equals("oreDraconium")){
+					count = 1;
+					alreadyMultiplied = false;
+					stopDropping = true;
+				}
+
 				oreInfos = OreChunkAddon.dropMap.get(orename);
-				count = randomCount(count * oreInfos.count, event.fortuneLevel, event.world);
+				if (!alreadyMultiplied)
+					count = randomCount(count * oreInfos.count, event.fortuneLevel, event.world);
 
 				ItemStack chunkStack = new ItemStack(oreInfos.chunkItem);
 				for (int c = 0; c < count; ++c) {
 					modifiedDrops.add(chunkStack);
-					alreadyDropped = true;
+					dropCount += 1;
 				}
 				break;
 			}
@@ -65,13 +76,13 @@ public class OreSwapper {
 		event.dropChance = 1.0f;
 		event.drops.addAll(modifiedDrops);
 
-		if (oreInfos.maxXP <= 0)
+		if (oreInfos.maxXP <= 0 || dropCount <= 0)
 			return;
 
 		int countOrbs = event.world.rand.nextInt(oreInfos.maxXP - oreInfos.minXP);
 		countOrbs += oreInfos.minXP;
 
-		for (int i = 0; i < countOrbs; ++i) {
+		for (int i = 0; i < countOrbs * dropCount; ++i) {
 			event.world.spawnEntityInWorld(new EntityXPOrb(event.world, event.x + 0.5D, event.y + 0.5D, event.z + 0.5D, 1));
 		}
 	}

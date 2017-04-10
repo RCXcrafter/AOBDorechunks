@@ -1,7 +1,8 @@
 package com.rcx.aobdorechunks.config;
 
 import net.minecraftforge.common.config.Configuration;
-
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import ganymedes01.aobd.lib.Reference;
 import ganymedes01.aobd.ore.Ore;
 import com.rcx.aobdorechunks.AOBDOC;
@@ -14,8 +15,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import net.minecraftforge.common.config.Configuration;
-import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class ConfigHandler {
 
@@ -56,7 +55,7 @@ public class ConfigHandler {
 
 	@SubscribeEvent
 	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent eventArgs) {
-		if (Reference.MOD_ID.equals(eventArgs.modID)) {
+		if (MOD_ID.equals(eventArgs.getModID())) {
 			configFile.load();
 			init();
 		}

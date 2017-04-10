@@ -1,13 +1,9 @@
 package com.rcx.aobdorechunks.item;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import ganymedes01.aobd.items.AOBDItem;
-import ganymedes01.aobd.ore.Ore;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.util.IIcon;
+import de.canitzp.genericdust.item.ColoredItem;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class AOBDItemOrechunk extends AOBDItem {
+public class AOBDItemOrechunk extends ColoredItem {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon[] icon;

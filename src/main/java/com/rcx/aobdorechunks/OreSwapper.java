@@ -4,20 +4,20 @@ import java.util.ArrayList;
 
 import com.rcx.aobdorechunks.OreChunkAddon.OreInfos;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class OreSwapper {
 
 	@SubscribeEvent
 	public void SwapOres(HarvestDropsEvent event) {
-		if (event.isSilkTouching)
+		if (event.isSilkTouching())
 			return;
-		if (event.drops.isEmpty())
+		if (event.getDrops().isEmpty())
 			return;
 
 		OreInfos oreInfos = null;
@@ -27,7 +27,7 @@ public class OreSwapper {
 		int dropCount = 0;
 		boolean stopDropping = false;
 
-		for (ItemStack drop : event.drops) {
+		for (ItemStack drop : event.getDrops()) {
 			int[] oreids = OreDictionary.getOreIDs(drop);
 			for (int i = 0; i < oreids.length; i++) {
 				orename = OreDictionary.getOreName(oreids[i]);
@@ -56,7 +56,7 @@ public class OreSwapper {
 
 				oreInfos = OreChunkAddon.dropMap.get(orename);
 				if (!alreadyMultiplied)
-					count = randomCount(count * oreInfos.count, event.fortuneLevel, event.world);
+					count = randomCount(count * oreInfos.count, event.getFortuneLevel(), event.getWorld());
 
 				ItemStack chunkStack = new ItemStack(oreInfos.chunkItem);
 				for (int c = 0; c < count; ++c) {
@@ -72,18 +72,18 @@ public class OreSwapper {
 		if (oreInfos == null)
 			return;
 
-		event.drops.removeAll(oldDrops);
-		event.dropChance = 1.0f;
-		event.drops.addAll(modifiedDrops);
+		event.getDrops().removeAll(oldDrops);
+		event.setDropChance(1.0f);
+		event.getDrops().addAll(modifiedDrops);
 
 		if (oreInfos.maxXP <= 0 || dropCount <= 0)
 			return;
 
-		int countOrbs = event.world.rand.nextInt(oreInfos.maxXP - oreInfos.minXP);
+		int countOrbs = event.getWorld().rand.nextInt(oreInfos.maxXP - oreInfos.minXP);
 		countOrbs += oreInfos.minXP;
 
 		for (int i = 0; i < countOrbs * dropCount; ++i) {
-			event.world.spawnEntityInWorld(new EntityXPOrb(event.world, event.x + 0.5D, event.y + 0.5D, event.z + 0.5D, 1));
+			event.getWorld().spawnEntityInWorld(new EntityXPOrb(event.getWorld(), event.getPos().getX() + 0.5D, event.getPos().getY() + 0.5D, event.getPos().getZ() + 0.5D, 1));
 		}
 	}
 

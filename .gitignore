@@ -49,6 +49,7 @@ Temporary Items
 # Gradle
 /.gradle
 /gradle
+/run
 gradlew
 gradlew.bat
 

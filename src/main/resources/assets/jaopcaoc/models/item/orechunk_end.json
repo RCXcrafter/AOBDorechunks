@@ -1,0 +1,7 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "jaopcaoc:items/orechunk",
+        "layer1": "jaopcaoc:items/orechunk_overlay_end"
+    }
+}

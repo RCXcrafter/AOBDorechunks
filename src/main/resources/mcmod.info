@@ -1,17 +1,17 @@
 [
 {
-  "modid": "aobdorechunks",
-  "name": "Another One Bites The Dust: Ore Chunks",
-  "description": "An AOBD addon that adds ore chunks!",
+  "modid": "jaopcaorechunks",
+  "name": "Just An Ore Processing Compatibility Addon: Ore Chunks",
+  "description": "A JAOPCA addon that adds ore chunks!",
   "version": "1.0.5",
-  "mcversion":"1.7.10",
+  "mcversion":"1.10.2",
   "url": "https://minecraft.curseforge.com/projects/aobd-ore-chunks",
   "updateUrl": "",
   "authorList": [
     "RCXcrafter"
   ],
-  "credits": "ganymedes01 for making AOBD and DemoXin for making Fortune Ores",
-  "logoFile": "aobd_orechunks_logo.png",
+  "credits": "TheLMiffy1111 for making JAOPCA and DemoXin for making Fortune Ores",
+  "logoFile": "jaopca_orechunks_logo.png",
   "screenshots": [
   ],
   "parent":"",

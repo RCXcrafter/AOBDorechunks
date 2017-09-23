@@ -1,18 +1,14 @@
 package com.rcx.aobdorechunks;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.google.common.collect.Lists;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
@@ -21,12 +17,11 @@ import thelm.jaopca.api.IOreEntry;
 import thelm.jaopca.api.ItemEntry;
 import thelm.jaopca.api.JAOPCAApi;
 import thelm.jaopca.api.ModuleBase;
-import thelm.jaopca.api.item.ItemProperties;
 import thelm.jaopca.api.utils.Utils;
 
 public class ModuleOreChunks extends ModuleBase {
 
-	public static final ItemEntry ORECHUNK_ENTRY = new ItemEntry(EnumEntryType.ITEM, "oreChunk", new ModelResourceLocation("aobdoc:orechunk_stone#inventory"));
+	public static final ItemEntry ORECHUNK_ENTRY = new ItemEntry(EnumEntryType.ITEM, "oreChunk", new ModelResourceLocation("jaopcaoc:orechunk_stone#inventory"));
 
 
 	//public static Map<Ore, OreChunksConfigs> chunkMap = new HashMap<Ore, OreChunksConfigs>();

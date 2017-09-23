@@ -1,7 +1,0 @@
-{
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "aobdoc:items/orechunk",
-        "layer1": "aobdoc:items/orechunk_overlay_nether"
-    }
-}

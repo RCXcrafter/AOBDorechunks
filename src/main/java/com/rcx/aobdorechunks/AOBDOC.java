@@ -5,35 +5,33 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import thelm.jaopca.api.JAOPCAApi;
 
 import java.util.ArrayList;
 
-import com.rcx.aobdorechunks.config.ConfigHandler;
-import com.rcx.aobdorechunks.lib.Reference;
+import com.rcx.aobdorechunks.proxy.CommonProxy;
 
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION_NUMBER, dependencies = Reference.DEPENDENCIES, guiFactory = Reference.GUI_FACTORY_CLASS)
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION_NUMBER, dependencies = Reference.DEPENDENCIES)
 public class AOBDOC {
+	
+	@SidedProxy(serverSide="com.rcx.aobdorechunks.proxy.CommonProxy",clientSide="com.rcx.aobdorechunks.proxy.ClientProxy")
+	public static CommonProxy proxy;
 
 	@Instance(Reference.MOD_ID)
 	public static AOBDOC instance;
-	public static String processingUnit;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		//ConfigHandler.INSTANCE.preInit(event.getSuggestedConfigurationFile());
-		//MinecraftForge.EVENT_BUS.register(ConfigHandler.INSTANCE);
-		//AddonRegisterer.registerAddon();
-
-		//MinecraftForge.EVENT_BUS.register(this);
+		JAOPCAApi.registerModule(new ModuleOreChunks());
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		//ConfigHandler.INSTANCE.init();
-		//MinecraftForge.EVENT_BUS.register(new OreSwapper());
+		MinecraftForge.EVENT_BUS.register(new OreSwapper());
 	}
 
 	@EventHandler

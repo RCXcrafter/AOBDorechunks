@@ -2,13 +2,17 @@ package com.rcx.aobdorechunks;
 
 import java.util.ArrayList;
 
-import com.rcx.aobdorechunks.OreChunkAddon.OreInfos;
+import com.rcx.aobdorechunks.ModuleOreChunks.OreInfos;
 
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class OreSwapper {
@@ -45,7 +49,7 @@ public class OreSwapper {
 
 					alreadyMultiplied = true;
 				}
-				if (!OreChunkAddon.dropMap.containsKey(orename))
+				if (!ModuleOreChunks.dropMap.containsKey(orename))
 					continue;
 
 				if (orename.equals("oreDraconium")){
@@ -54,7 +58,7 @@ public class OreSwapper {
 					stopDropping = true;
 				}
 
-				oreInfos = OreChunkAddon.dropMap.get(orename);
+				oreInfos = ModuleOreChunks.dropMap.get(orename);
 				if (!alreadyMultiplied)
 					count = randomCount(count * oreInfos.count, event.getFortuneLevel(), event.getWorld());
 
@@ -87,7 +91,7 @@ public class OreSwapper {
 		}
 	}
 
-	private int randomCount(int baseCount, int fortuneLevel, World world) {
+	int randomCount(int baseCount, int fortuneLevel, World world) {
 		if (fortuneLevel > 0) {
 			int j = world.rand.nextInt(fortuneLevel + 3) - 3;
 

@@ -31,7 +31,7 @@ public class OreSwapper {
 			int[] oreids = OreDictionary.getOreIDs(drop);
 			for (int i = 0; i < oreids.length; i++) {
 				orename = OreDictionary.getOreName(oreids[i]);
-				int count = drop.stackSize;
+				int count = drop.getCount();
 				boolean alreadyMultiplied = false;
 
 				if (!(orename.startsWith("ore") || orename.startsWith("dust")))
@@ -83,7 +83,7 @@ public class OreSwapper {
 		countOrbs += oreInfos.minXP;
 
 		for (int i = 0; i < countOrbs * dropCount; ++i) {
-			event.getWorld().spawnEntityInWorld(new EntityXPOrb(event.getWorld(), event.getPos().getX() + 0.5D, event.getPos().getY() + 0.5D, event.getPos().getZ() + 0.5D, 1));
+			event.getWorld().spawnEntity(new EntityXPOrb(event.getWorld(), event.getPos().getX() + 0.5D, event.getPos().getY() + 0.5D, event.getPos().getZ() + 0.5D, 1));
 		}
 	}
 

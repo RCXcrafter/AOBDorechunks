@@ -4,8 +4,8 @@
   "name": "Just An Ore Processing Compatibility Addon: Ore Chunks",
   "parent": "",
   "description": "A JAOPCA addon that adds ore chunks!",
-  "version": "1.0.5",
-  "mcversion":"1.10.2",
+  "version": "1.0.6",
+  "mcversion":"1.12.2",
   "screenshots": [],
   "dependencies": [
     "jaopca"

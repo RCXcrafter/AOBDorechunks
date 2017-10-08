@@ -28,6 +28,8 @@ public class OreSwapper {
 		boolean stopDropping = false;
 
 		for (ItemStack drop : event.getDrops()) {
+			if (drop.equals(null))
+				continue;
 			int[] oreids = OreDictionary.getOreIDs(drop);
 			for (int i = 0; i < oreids.length; i++) {
 				orename = OreDictionary.getOreName(oreids[i]);

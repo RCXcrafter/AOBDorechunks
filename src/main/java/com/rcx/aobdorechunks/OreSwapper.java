@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.rcx.aobdorechunks.ModuleOreChunks.OreInfos;
 
 import net.minecraft.entity.item.EntityXPOrb;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
@@ -26,7 +27,13 @@ public class OreSwapper {
 		ArrayList<ItemStack> modifiedDrops = new ArrayList<ItemStack>();
 		int dropCount = 0;
 		boolean stopDropping = false;
-
+		boolean blockBrokenIsOre = false;
+		
+		for (int lol : OreDictionary.getOreIDs(new ItemStack(Item.getItemFromBlock(event.getState().getBlock())))) {
+			if(OreDictionary.getOreName(lol).startsWith("ore"))
+				blockBrokenIsOre = true;
+		}
+		
 		for (ItemStack drop : event.getDrops()) {
 			if (drop.isEmpty() || drop.equals(null))
 				continue;
@@ -42,7 +49,7 @@ public class OreSwapper {
 				if (orename.startsWith("dust")) {
 					orename = orename.replace("dust", "ore");
 
-					if (stopDropping)
+					if (stopDropping || !blockBrokenIsOre)
 						continue;
 
 					alreadyMultiplied = true;

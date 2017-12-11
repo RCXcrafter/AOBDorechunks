@@ -28,12 +28,15 @@ public class OreSwapper {
 		int dropCount = 0;
 		boolean stopDropping = false;
 		boolean blockBrokenIsOre = false;
-		
-		for (int lol : OreDictionary.getOreIDs(new ItemStack(Item.getItemFromBlock(event.getState().getBlock())))) {
-			if(OreDictionary.getOreName(lol).startsWith("ore"))
-				blockBrokenIsOre = true;
+		ItemStack oreBlock = new ItemStack(Item.getItemFromBlock(event.getState().getBlock()));
+
+		if (!oreBlock.isEmpty() || oreBlock.equals(null)){
+			for (int oreDictID : OreDictionary.getOreIDs(oreBlock)) {
+				if(OreDictionary.getOreName(oreDictID).startsWith("ore"))
+					blockBrokenIsOre = true;
+			}
 		}
-		
+
 		for (ItemStack drop : event.getDrops()) {
 			if (drop.isEmpty() || drop.equals(null))
 				continue;

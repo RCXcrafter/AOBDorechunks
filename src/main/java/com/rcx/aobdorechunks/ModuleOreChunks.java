@@ -61,12 +61,30 @@ public class ModuleOreChunks extends ModuleBase {
 	}
 
 	@Override
+	public void preInit() {
+		for(FirstOreInfos info : oreInformation) {
+			ItemStack oreStack = Utils.getOreStack("oreChunk", info.entry, 1);
+
+			OreDictionary.registerOre(processingUnit + info.entry.getOreName(), oreStack);
+			
+			// aluminum/aluminium nonsense
+			if (info.entry.getOreName().equals("Aluminum")) {
+				OreDictionary.registerOre(processingUnit + "Aluminium", oreStack);
+				OreDictionary.registerOre("oreChunk" + "Aluminium", oreStack);
+			}
+			if (info.entry.getOreName().equals("Aluminium")) {
+				OreDictionary.registerOre(processingUnit + "Aluminum", oreStack);
+				OreDictionary.registerOre("oreChunk" + "Aluminum", oreStack);
+			}
+		}
+	}
+
+	@Override
 	public void init() {
 		for(FirstOreInfos info : oreInformation) {
 			ItemStack oreStack = Utils.getOreStack("oreChunk", info.entry, 1);
 			
 			//recipe stuff
-			OreDictionary.registerOre(processingUnit + info.entry.getOreName(), oreStack);
 			GameRegistry.addSmelting(oreStack, Utils.getOreStack("ingot", info.entry, 1), 1F);
 
 			//make it drop
@@ -75,13 +93,9 @@ public class ModuleOreChunks extends ModuleBase {
 
 			// aluminum/aluminium nonsense
 			if (info.entry.getOreName().equals("Aluminum")) {
-				OreDictionary.registerOre(processingUnit + "Aluminium", oreStack);
-				OreDictionary.registerOre("oreChunk" + "Aluminium", oreStack);
 				dropMap.put("oreAluminium", infos);
 			}
 			if (info.entry.getOreName().equals("Aluminium")) {
-				OreDictionary.registerOre(processingUnit + "Aluminum", oreStack);
-				OreDictionary.registerOre("oreChunk" + "Aluminum", oreStack);
 				dropMap.put("oreAluminum", infos);
 			}
 		}

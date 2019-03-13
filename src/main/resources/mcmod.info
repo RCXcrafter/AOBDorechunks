@@ -1,10 +1,10 @@
 [
 {
-  "modid": "jaopcaorechunks",
+  "modid": "jaopcaoc",
   "name": "Just An Ore Processing Compatibility Addon: Ore Chunks",
   "parent": "",
   "description": "A JAOPCA addon that adds ore chunks!",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "mcversion":"1.12.2",
   "screenshots": [],
   "dependencies": [

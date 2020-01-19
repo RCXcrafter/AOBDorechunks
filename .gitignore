@@ -49,6 +49,7 @@ Temporary Items
 # Gradle
 /.gradle
 /gradle
+/build
 /run
 gradlew
 gradlew.bat
@@ -59,4 +60,5 @@ gradlew.bat
 /.settings
 .classpath
 .project
+*.launch
 

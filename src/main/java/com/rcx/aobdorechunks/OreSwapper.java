@@ -8,6 +8,7 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
@@ -88,7 +89,7 @@ public class OreSwapper {
 		event.setDropChance(1.0f);
 		event.getDrops().addAll(modifiedDrops);
 
-		if (oreInfos.maxXP <= 0 || dropCount <= 0)
+		if (oreInfos.maxXP <= 0 || dropCount <= 0 || event.getHarvester() instanceof FakePlayer)
 			return;
 
 		int countOrbs = event.getWorld().rand.nextInt(oreInfos.maxXP - oreInfos.minXP);

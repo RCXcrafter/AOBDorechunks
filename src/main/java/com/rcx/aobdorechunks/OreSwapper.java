@@ -102,7 +102,7 @@ public class OreSwapper {
 
 	int randomCount(int baseCount, int fortuneLevel, World world) {
 		if (fortuneLevel > 0) {
-			int j = world.rand.nextInt(fortuneLevel + 3) - 3;
+			int j = world.rand.nextInt(fortuneLevel + 4) - 3;
 
 			if (j < 0)
 				j = 0;

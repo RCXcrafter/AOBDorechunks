@@ -1,0 +1,7 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "jaopcaorechunks:item/ore_chunks",
+        "layer1": "jaopcaorechunks:item/ore_chunks_overlay"
+    }
+}

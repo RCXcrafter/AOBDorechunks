@@ -1,0 +1,8 @@
+{
+  "type": "jaopcaorechunks:ore_chunk_replacer",
+  "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+  ]
+}

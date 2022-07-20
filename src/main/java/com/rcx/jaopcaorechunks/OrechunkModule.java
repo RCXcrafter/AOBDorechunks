@@ -48,6 +48,10 @@ public class OrechunkModule implements IModule {
 	public void defineMaterialConfig(IModuleData moduleData, Map<IMaterial, IDynamicSpecConfig> configs) {
 		for (IMaterial material : configs.keySet()) {
 			OreSwapper.materialDroprates.put(material, configs.get(material).getDefinedInt("orechunks.droprate", 1, "The amount of ore chunks that drop from this ore"));
+			int[] XPDrops = new int[2];
+			XPDrops[0] = configs.get(material).getDefinedInt("orechunks.minxp", 1, "The minimal amount of xp dropped from this ore");
+			XPDrops[1] = configs.get(material).getDefinedInt("orechunks.maxxp", 4, "The maximal amount of xp dropped from this ore");
+			OreSwapper.XPDroprates.put(material, XPDrops);
 		}
 	}
 

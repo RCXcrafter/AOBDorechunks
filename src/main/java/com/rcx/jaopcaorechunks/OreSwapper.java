@@ -1,6 +1,8 @@
 package com.rcx.jaopcaorechunks;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.JsonObject;
 
@@ -25,6 +27,8 @@ import thelm.jaopca.utils.MiscHelper;
 
 public class OreSwapper extends LootModifier {
 
+	public static Map<IMaterial, Integer> materialDroprates = new HashMap<IMaterial, Integer>();
+
 	protected OreSwapper(ILootCondition[] conditionsIn) {
 		super(conditionsIn);
 		//MinecraftForge.EVENT_BUS.addListener(this::dropXP);
@@ -46,7 +50,7 @@ public class OreSwapper extends LootModifier {
 				if (blockItem.isIn(oreTag)) {
 					for (ItemStack stack : generatedLoot) {
 						if (stack.getItem().isIn(oreTag)) {
-							int amount = randomCount(stack.getCount(), EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, context.get(LootParameters.TOOL)), context.getWorld());
+							int amount = randomCount(stack.getCount() * materialDroprates.get(material).intValue(), EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, context.get(LootParameters.TOOL)), context.getWorld());
 							generatedLoot.remove(stack);
 							generatedLoot.add(new ItemStack(chunkInfo.asItem(), amount));
 						}
